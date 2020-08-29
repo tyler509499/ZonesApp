@@ -106,10 +106,10 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brd-dY-zbv">
-                                            <rect key="frame" x="20" y="6" width="90" height="30"/>
+                                            <rect key="frame" x="20" y="8" width="90" height="28"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="HJu-SD-Tf8"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="97" id="jWY-rB-jQj"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="1yQ-gH-Jw3"/>
+                                                <constraint firstAttribute="width" secondItem="Brd-dY-zbv" secondAttribute="height" multiplier="45:14" id="NG8-3b-wfu"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="+ add new zone"/>
@@ -120,10 +120,9 @@
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
-                                        <constraint firstItem="Brd-dY-zbv" firstAttribute="top" secondItem="0Lf-jG-XRF" secondAttribute="top" constant="6" id="7d1-6q-PDB"/>
-                                        <constraint firstAttribute="bottom" secondItem="Brd-dY-zbv" secondAttribute="bottom" constant="8" id="EP7-9u-IDC"/>
-                                        <constraint firstAttribute="trailing" secondItem="Brd-dY-zbv" secondAttribute="trailing" constant="619" id="Kqm-UP-WuC"/>
-                                        <constraint firstItem="Brd-dY-zbv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Lf-jG-XRF" secondAttribute="leading" constant="20" id="XO6-jF-gxI"/>
+                                        <constraint firstItem="Brd-dY-zbv" firstAttribute="top" secondItem="0Lf-jG-XRF" secondAttribute="topMargin" id="6pP-dL-hca"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Brd-dY-zbv" secondAttribute="trailing" constant="20" symbolic="YES" id="QbA-UB-IGG"/>
+                                        <constraint firstItem="Brd-dY-zbv" firstAttribute="leading" secondItem="0Lf-jG-XRF" secondAttribute="leading" constant="20" id="kAQ-0T-hwh"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -164,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdC-Vt-9bf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="699" y="456"/>
+            <point key="canvasLocation" x="698.55072463768124" y="455.70652173913049"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Di-sG-PM5">

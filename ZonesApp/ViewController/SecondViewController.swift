@@ -28,6 +28,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.reloadData()
         tableView.rowHeight = 91.0
+        
     
     
 }
@@ -53,7 +54,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as! DemoTableViewCell
-        let zone = self.zones[indexPath.row]
+        let zone = zones[indexPath.row]
         cell.zoneLabel.text = "Zone " + String(zone.zoneNumber)
         cell.zoneTextField.text = zone.zoneName
         cell.outletTextField.text = String(zone.outletNumber)
