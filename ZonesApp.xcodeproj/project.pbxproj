@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10DDE1724FA59800090215D /* ZoneData.json in Resources */ = {isa = PBXBuildFile; fileRef = A10DDE1624FA59800090215D /* ZoneData.json */; };
 		A10DDE1B24FA635E0090215D /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10DDE1A24FA635E0090215D /* DataLoader.swift */; };
 		A10F19CD24F0CDEC007AAF96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10F19CC24F0CDEC007AAF96 /* AppDelegate.swift */; };
 		A10F19CF24F0CDEC007AAF96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10F19CE24F0CDEC007AAF96 /* SceneDelegate.swift */; };
@@ -25,7 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A10DDE1624FA59800090215D /* ZoneData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ZoneData.json; sourceTree = "<group>"; };
 		A10DDE1A24FA635E0090215D /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		A10F19C924F0CDEC007AAF96 /* ZonesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZonesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10F19CC24F0CDEC007AAF96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,7 +72,6 @@
 		A10F19CB24F0CDEC007AAF96 /* ZonesApp */ = {
 			isa = PBXGroup;
 			children = (
-				A10DDE1624FA59800090215D /* ZoneData.json */,
 				A10DDE1A24FA635E0090215D /* DataLoader.swift */,
 				A1E3220724F82B9800AB3F56 /* ZoneModel.swift */,
 				A1E3220924F82C5E00AB3F56 /* DataManager.swift */,
@@ -169,7 +166,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10F19DC24F0CDED007AAF96 /* LaunchScreen.storyboard in Resources */,
-				A10DDE1724FA59800090215D /* ZoneData.json in Resources */,
 				A10F19D924F0CDED007AAF96 /* Assets.xcassets in Resources */,
 				A19D2F9C24F234B800F7CDDD /* DemoTableViewCell.xib in Resources */,
 				A10F19D424F0CDEC007AAF96 /* Main.storyboard in Resources */,

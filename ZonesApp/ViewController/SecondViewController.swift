@@ -23,8 +23,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
     super.viewDidLoad()
         
-//        let data = DataLoader().zoneData
-//        print(data)
+
         
         let nib = UINib(nibName: "DemoTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "DemoTableViewCell")
@@ -40,8 +39,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBAction func doneButtonSaveReturn(_ sender: Any) {
-         self.dismiss(animated: true, completion: nil)
+        
+        self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    
    
     override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
