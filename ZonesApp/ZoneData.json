@@ -1,18 +1,23 @@
 
 [
   {
-    "zoneNumber": 1,
-    "zoneName": "hallaway",
-    "outletNumber": 12
+    "zoneNumber":1,
+    "zoneName":"hallaway",
+    "outletNumber":12
   },
   {
-    "zoneNumber": 2,
-    "zoneName": "kitchen",
-    "outletNumber": 9
+    "zoneNumber":2,
+    "zoneName":"kitchen",
+    "outletNumber":9
   },
   {
-    "zoneNumber": 3,
-    "zoneName": "bedroom",
-    "outletNumber": 7
+    "zoneNumber":3,
+    "zoneName":"bedroom",
+    "outletNumber":7
+  },
+  {
+    "zoneNumber":4,
+    "zoneName":"bathroom",
+    "outletNumber":4
   }
 ]

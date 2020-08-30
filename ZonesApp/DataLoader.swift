@@ -10,29 +10,25 @@ import Foundation
 
 public class DataLoader {
      
-    @Published var zoneData = [newZones]()
+    @Published var zoneData = [NewZones]()
     
     init() {
         load()
-//        sort()
     }
     
     func load() {
         
         if let fileLocation = Bundle.main.url(forResource: "ZoneData", withExtension: "json") {
-        
-        do {
-            let data = try Data(contentsOf: fileLocation)
-            let jsonDecoder = JSONDecoder()
-            let dataFromJson = try jsonDecoder.decode([newZones].self, from: data)
+            do {
+                let data = try! Data(contentsOf: fileLocation)
+                let jsonDecoder = JSONDecoder()
+                let dataFromJson = try! jsonDecoder.decode([NewZones].self, from: data)
+                self.zoneData = dataFromJson
+            } catch {
+                print(error)
+            }
             
-            self.zoneData = dataFromJson
-            
-            
-        } catch {
-            print(error)
-        }
     }
-}
     
+}
 }

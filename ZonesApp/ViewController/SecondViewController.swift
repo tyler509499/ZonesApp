@@ -15,12 +15,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
 @IBOutlet public var tableView: UITableView!
     
-    var zones = [newZones]()
-     
+    
+    
+    let data = DataLoader().zoneData
     
     
     override func viewDidLoad() {
     super.viewDidLoad()
+        
+//        let data = DataLoader().zoneData
+//        print(data)
         
         let nib = UINib(nibName: "DemoTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "DemoTableViewCell")
@@ -29,7 +33,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.reloadData()
         tableView.rowHeight = 91.0
         
-    
+
     
 }
 
@@ -49,16 +53,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return zones.count
+        return data.count
        }
        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as! DemoTableViewCell
-        let zone = zones[indexPath.row]
-        cell.zoneLabel.text = "Zone " + String(zone.zoneNumber)
-        cell.zoneTextField.text = zone.zoneName
-        cell.outletTextField.text = String(zone.outletNumber)
-        self.tableView.reloadData()
+        //let zone = data[indexPath.row]
+        cell.zoneLabel.text = "Zone " + String(data[indexPath.row].zoneNumber)
+        cell.zoneTextField.text = data[indexPath.row].zoneName
+        cell.outletTextField.text = String(data[indexPath.row].outletNumber)
+        //self.tableView.reloadData()
         return cell
        }
     
