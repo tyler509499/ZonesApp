@@ -8,33 +8,19 @@
 
 import Foundation
 
+struct ZoneData: Codable {
+
+    var newZones: [NewZones]
+    var reuseZones: Int
+}
+
 struct NewZones: Codable {
+    
     var zoneNumber: Int
     var zoneName: String
     var outletNumber: Int
-
-//var description: String {
-//  return "\(zoneNumber). Zone \(zoneNumber) (\(zoneName)) (\(outletNumber))"
-//}
-//    enum CodingKeys: String, CodingKey {
-//      case zoneNumber
-//      case zoneName
-//      case outletNumber
-//    }
-    
-    
-//    init(zoneNumber: Int, zoneName: String, outletNumber: Int) {
-//      self.zoneNumber = zoneNumber
-//      self.zoneName = zoneName
-//      self.outletNumber = outletNumber
-//     
-//    }
 }
-//struct Zones: Codable {
-//    var newZones: [newZones]
-//    var reusedZone: Int
-//    
-//}
 
-
-
+    
+    
+    

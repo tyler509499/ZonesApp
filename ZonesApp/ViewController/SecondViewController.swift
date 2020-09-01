@@ -17,7 +17,11 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     
-    let data = DataLoader().zoneData
+    //var data = DataManager.default.zoneData
+    
+    var allCellsZoneLabelText: String = ""
+    var allCellsZoneTextfieldText: String = ""
+    var allCellsOutletNumber: String = ""
     
     
     override func viewDidLoad() {
@@ -32,7 +36,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.reloadData()
         tableView.rowHeight = 91.0
         
-
     
 }
 
@@ -56,15 +59,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return 3
        }
        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as! DemoTableViewCell
         //let zone = data[indexPath.row]
-        cell.zoneLabel.text = "Zone " + String(data[indexPath.row].zoneNumber)
-        cell.zoneTextField.text = data[indexPath.row].zoneName
-        cell.outletTextField.text = String(data[indexPath.row].outletNumber)
+    
+        cell.zoneLabel.text = ""//+ String(data[indexPath.row].zoneNumber)
+        cell.zoneTextField.text = ""//data[indexPath.row].zoneName
+        cell.outletTextField.text = ""//String(data[indexPath.row].outletNumber)
         //self.tableView.reloadData()
         return cell
        }
@@ -80,35 +84,41 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
        //delete row by swipe
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 //
+//
 //           if editingStyle == .delete {
-//               zoneLabelData.remove(at: indexPath.row)
-//               tableView.beginUpdates()
-//               tableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
-//               tableView.endUpdates()
+//            tableView.beginUpdates()
+//            tableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
+//            tableView.endUpdates()
 //           }
 //       }
-    
+//
     //insert new row button
 //    @IBAction func addButtonTapped(_ sender: UIButton) {
-//        insertNewRow()
+//        let indexPath = IndexPath(row: 1, section:0)
+//        tableView.beginUpdates()
+//        tableView.insertRows(at: [indexPath], with: .automatic)
+//        tableView.endUpdates()
+//        }
 //    }
 
     //insert new row function
 //    func insertNewRow() {
 //
-//        zoneLabelData.append(String(zoneLabelData.count + 1))
-//        let indexPath = IndexPath(row: zoneLabelData.count - 1, section: 0)
+//
+//
+//
+//        let indexPath = IndexPath(row: 1, section: 0)
 //
 //        tableView.beginUpdates()
 //        tableView.insertRows(at: [indexPath], with: .automatic)
 //        tableView.endUpdates()
 //
 //    }
+
+
+}
+    
+    
+    
     
 
-    
-    
-    
-    
-    
-}
