@@ -11,17 +11,19 @@ import UIKit
 
 class FirstViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var newZones: UITextField!
-    @IBOutlet weak var reuseZones: UITextField!
+    @IBOutlet weak var newZonesTextField: UITextField!
+    @IBOutlet weak var reuseZonesTextField: UITextField!
     var picker: MyPickerView?
     var pickerAccessory: UIToolbar?
-    let defaultReuseZonesvalue = "0"
+  
+    
+    private var zonePrivate = ZoneData().self
    
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-               newZones.resignFirstResponder()
-               reuseZones.resignFirstResponder()
+               newZonesTextField.resignFirstResponder()
+               reuseZonesTextField.resignFirstResponder()
                return true
            }
            
@@ -37,13 +39,14 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
       
       
         
-        reuseZones.text = defaultReuseZonesvalue
+        reuseZonesTextField.text = String(DataManager.default.zoneData.reuseZones)
+        
         //Picker
         picker = MyPickerView()
         picker?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         picker?.backgroundColor = UIColor.white
         picker?.pickerData = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
-        reuseZones.inputView = picker
+        reuseZonesTextField.inputView = picker
         
         //Toolbar
         pickerAccessory = UIToolbar()
@@ -55,9 +58,9 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         var frame = pickerAccessory?.frame
         frame?.size.height = 44.0
         pickerAccessory?.frame = frame!
-        reuseZones.inputAccessoryView = pickerAccessory
+        reuseZonesTextField.inputAccessoryView = pickerAccessory
         
-        addDoneClearButtonTo(reuseZones)
+        addDoneClearButtonTo(reuseZonesTextField)
         
     
     }
@@ -95,14 +98,14 @@ extension FirstViewController {
     
 
    @objc func cancelBtnClicked(_ button: UIBarButtonItem?) {
-            reuseZones?.resignFirstResponder()
-            reuseZones.text = defaultReuseZonesvalue
+            reuseZonesTextField?.resignFirstResponder()
+            reuseZonesTextField.text = String(zonePrivate.reuseZones)
     
         }
 
    @objc func doneBtnClicked(_ button: UIBarButtonItem?) {
-            reuseZones?.resignFirstResponder()
-            reuseZones.text = picker?.selectedValue
+            reuseZonesTextField?.resignFirstResponder()
+            reuseZonesTextField.text = picker?.selectedValue
         }
     }
 
