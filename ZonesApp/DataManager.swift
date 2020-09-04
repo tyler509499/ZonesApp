@@ -9,43 +9,45 @@
 import Foundation
 
 
-public class DataManager: ObservableObject {
+public class DataManager {
 
     static var `default` = DataManager()
-    var zoneData: [ZoneData]{
-        get{
-            loadJSON()
+    
+    var zoneData: ZoneData {
+        get {
+           return loadJSON() ?? ZoneData()
         }
         set {
-            saveJSON()
+            saveJSON(newValue)
         }
     }
     
     let zoneJSONURL = URL(fileURLWithPath: "ZoneData",
-                           relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
+                          relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     
     public init() {
        
     }
    
-    private func loadJSON() {
+    private func loadJSON() -> ZoneData? {
       guard FileManager.default.fileExists(atPath: zoneJSONURL.path) else {
-        return
+        return nil
       }
       
       let decoder = JSONDecoder()
       
       do {
         let data = try Data(contentsOf: zoneJSONURL)
-        zoneData = try decoder.decode([ZoneData].self, from: data)
+        zoneData = try decoder.decode(ZoneData.self, from: data)
       } catch let error {
         print(error)
       }
+        return zoneData
     }
     
     
     
-    private func saveJSON() {
+    private func saveJSON(_ zoneData: ZoneData) {
       let encoder = JSONEncoder()
      
       do {

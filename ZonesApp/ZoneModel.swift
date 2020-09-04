@@ -10,8 +10,12 @@ import Foundation
 
 struct ZoneData: Codable {
 
-    var newZones: [NewZones]
-    var reuseZones: Int
+    var newZones: [NewZones] = []
+    var reuseZones: Int = 0
+    
+    init() {
+        
+    }
 }
 
 struct NewZones: Codable {
@@ -19,6 +23,8 @@ struct NewZones: Codable {
     var zoneNumber: Int
     var zoneName: String
     var outletNumber: Int
+    
+    
 }
 
     
