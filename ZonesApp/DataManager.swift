@@ -23,25 +23,28 @@ public class DataManager {
     }
     
     
-    static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let zoneJSONURL = documentsDirectory.appendingPathComponent("zone_data").appendingPathExtension("json")
+    private let zoneJSONURL: URL = {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory,
+        in: .userDomainMask).first!
+        return documentsDirectory.appendingPathComponent("zone_data.json")
+   }()
 
+    
     func loadJSON() -> ZoneData? {
-        guard FileManager.default.fileExists(atPath: DataManager.zoneJSONURL.path) else {
-        return nil
-      }
-        if let data = try? Data(contentsOf: DataManager.zoneJSONURL),
-        let decodedZones = try? JSONDecoder().decode(ZoneData.self, from: data){
-            zoneData = decodedZones
+        do {
+            let data = try Data(contentsOf: zoneJSONURL)
+            let decodedZones = try JSONDecoder().decode(ZoneData.self, from: data)
+            return decodedZones
+        } catch {
+            return nil
         }
-        return zoneData
     }
     
     func saveJSON(_ zoneData: ZoneData) {
       
         do {
-            try JSONEncoder().encode(zoneData)
-                .write(to: DataManager.zoneJSONURL)
+            let data = try JSONEncoder().encode(zoneData)
+            try data.write(to: zoneJSONURL)
         } catch {
             print(error)
         }

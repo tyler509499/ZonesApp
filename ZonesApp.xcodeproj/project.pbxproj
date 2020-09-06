@@ -12,7 +12,6 @@
 		A10F19CF24F0CDEC007AAF96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10F19CE24F0CDEC007AAF96 /* SceneDelegate.swift */; };
 		A10F19D124F0CDEC007AAF96 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10F19D024F0CDEC007AAF96 /* FirstViewController.swift */; };
 		A10F19D424F0CDEC007AAF96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A10F19D224F0CDEC007AAF96 /* Main.storyboard */; };
-		A10F19D724F0CDEC007AAF96 /* ZonesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A10F19D524F0CDEC007AAF96 /* ZonesApp.xcdatamodeld */; };
 		A10F19D924F0CDED007AAF96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10F19D824F0CDED007AAF96 /* Assets.xcassets */; };
 		A10F19DC24F0CDED007AAF96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A10F19DA24F0CDED007AAF96 /* LaunchScreen.storyboard */; };
 		A19D2F9B24F234B800F7CDDD /* DemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19D2F9924F234B800F7CDDD /* DemoTableViewCell.swift */; };
@@ -29,7 +28,6 @@
 		A10F19CE24F0CDEC007AAF96 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A10F19D024F0CDEC007AAF96 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		A10F19D324F0CDEC007AAF96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A10F19D624F0CDEC007AAF96 /* ZonesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZonesApp.xcdatamodel; sourceTree = "<group>"; };
 		A10F19D824F0CDED007AAF96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10F19DB24F0CDED007AAF96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A10F19DD24F0CDED007AAF96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,7 +79,6 @@
 				A10F19D824F0CDED007AAF96 /* Assets.xcassets */,
 				A10F19DA24F0CDED007AAF96 /* LaunchScreen.storyboard */,
 				A10F19DD24F0CDED007AAF96 /* Info.plist */,
-				A10F19D524F0CDEC007AAF96 /* ZonesApp.xcdatamodeld */,
 			);
 			path = ZonesApp;
 			sourceTree = "<group>";
@@ -178,7 +175,6 @@
 			files = (
 				A10DDE1B24FA635E0090215D /* DataManager.swift in Sources */,
 				A10F19D124F0CDEC007AAF96 /* FirstViewController.swift in Sources */,
-				A10F19D724F0CDEC007AAF96 /* ZonesApp.xcdatamodeld in Sources */,
 				A19D2F9B24F234B800F7CDDD /* DemoTableViewCell.swift in Sources */,
 				A1E3220824F82B9800AB3F56 /* ZoneModel.swift in Sources */,
 				A10F19CD24F0CDEC007AAF96 /* AppDelegate.swift in Sources */,
@@ -382,19 +378,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A10F19D524F0CDEC007AAF96 /* ZonesApp.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A10F19D624F0CDEC007AAF96 /* ZonesApp.xcdatamodel */,
-			);
-			currentVersion = A10F19D624F0CDEC007AAF96 /* ZonesApp.xcdatamodel */;
-			path = ZonesApp.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A10F19C124F0CDEC007AAF96 /* Project object */;
 }

@@ -16,10 +16,9 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
     var picker: MyPickerView?
     var pickerAccessory: UIToolbar?
     let reusePickerData: [String] = { (0...14).map { "\($0)" }}()
- 
+    
 
-   
-    private var privateZone = DataManager().zoneData
+    private var privateZone = ZoneData()
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -37,9 +36,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        reuseZonesTextField.text = String(privateZone.reuseZones)
-       
+        reuseZonesTextField.text = "0"
+        DataManager.default.zoneData = privateZone
         
         //Picker
         picker = MyPickerView()
@@ -101,22 +99,18 @@ extension FirstViewController {
 
    @objc func cancelBtnClicked(_ button: UIBarButtonItem?) {
             reuseZonesTextField?.resignFirstResponder()
-            reuseZonesTextField.text = String(privateZone.reuseZones)
+            reuseZonesTextField.text = "0"
     
         }
 
    @objc func doneBtnClicked(_ button: UIBarButtonItem?) {
             reuseZonesTextField?.resignFirstResponder()
             reuseZonesTextField.text = picker?.selectedValue
-            DataManager().saveJSON(privateZone)
+            
+            
+            
     }
-    
-//    func updateReuseZone() {
-//        if let newValue = picker?.selectedValue {
-//            privateZone.reuseZones = Int(newValue)!
-//        }
-//        
-//    }
+
         
     
            
