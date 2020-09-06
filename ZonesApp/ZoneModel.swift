@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct ZoneData: Codable {
+public struct ZoneData: Codable {
 
     var newZones: [NewZones] = []
-    var reuseZones: Int = 4
+    var reuseZones: Int = 0
     
     init() {
         

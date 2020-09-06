@@ -13,7 +13,7 @@ public class DataManager {
 
     static var `default` = DataManager()
     
-    var zoneData: ZoneData {
+    var zoneData: ZoneData{
         get {
            return loadJSON() ?? ZoneData()
         }
@@ -22,41 +22,29 @@ public class DataManager {
         }
     }
     
-    let zoneJSONURL = URL(fileURLWithPath: "ZoneData",
-                          relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     
-    public init() {
-       
-    }
-   
-    private func loadJSON() -> ZoneData? {
-      guard FileManager.default.fileExists(atPath: zoneJSONURL.path) else {
+    static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let zoneJSONURL = documentsDirectory.appendingPathComponent("zone_data").appendingPathExtension("json")
+
+    func loadJSON() -> ZoneData? {
+        guard FileManager.default.fileExists(atPath: DataManager.zoneJSONURL.path) else {
         return nil
       }
-      
-      let decoder = JSONDecoder()
-      
-      do {
-        let data = try Data(contentsOf: zoneJSONURL)
-        zoneData = try decoder.decode(ZoneData.self, from: data)
-      } catch let error {
-        print(error)
-      }
+        if let data = try? Data(contentsOf: DataManager.zoneJSONURL),
+        let decodedZones = try? JSONDecoder().decode(ZoneData.self, from: data){
+            zoneData = decodedZones
+        }
         return zoneData
     }
     
-    
-    
-    private func saveJSON(_ zoneData: ZoneData) {
-      let encoder = JSONEncoder()
-     
-      do {
-        let data = try! encoder.encode(zoneData)
+    func saveJSON(_ zoneData: ZoneData) {
+      
+        do {
+            try JSONEncoder().encode(zoneData)
+                .write(to: DataManager.zoneJSONURL)
+        } catch {
+            print(error)
+        }
         
-        try data.write(to: zoneJSONURL, options: .atomicWrite)
-      } catch let error {
-        print(error)
-      }
-    }
-    
+}
 }

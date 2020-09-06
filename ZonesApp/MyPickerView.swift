@@ -10,6 +10,8 @@ import UIKit
 
 class MyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
     
+var pick: FirstViewController?
+    
  public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerData != nil {
             return pickerData!.count
@@ -32,16 +34,13 @@ class MyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
 
     //Data of the picker
     
-public var pickerData: [String]? {
+public var pickerData: [String]?  {
     didSet {
         super.delegate = self
         super.dataSource = self
         self.reloadAllComponents()
     }
 }
-
-
-
 
 //Get the selected value from picker
 

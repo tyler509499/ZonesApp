@@ -15,10 +15,11 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var reuseZonesTextField: UITextField!
     var picker: MyPickerView?
     var pickerAccessory: UIToolbar?
-  
-    
-    private var zonePrivate = ZoneData().self
+    let reusePickerData: [String] = { (0...14).map { "\($0)" }}()
+ 
+
    
+    private var privateZone = DataManager().zoneData
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -36,17 +37,18 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-      
         
-        reuseZonesTextField.text = String(DataManager.default.zoneData.reuseZones)
+        reuseZonesTextField.text = String(privateZone.reuseZones)
+       
         
         //Picker
         picker = MyPickerView()
         picker?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         picker?.backgroundColor = UIColor.white
-        picker?.pickerData = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
+        picker?.pickerData = reusePickerData
         reuseZonesTextField.inputView = picker
+        
+     
         
         //Toolbar
         pickerAccessory = UIToolbar()
@@ -99,13 +101,24 @@ extension FirstViewController {
 
    @objc func cancelBtnClicked(_ button: UIBarButtonItem?) {
             reuseZonesTextField?.resignFirstResponder()
-            reuseZonesTextField.text = String(zonePrivate.reuseZones)
+            reuseZonesTextField.text = String(privateZone.reuseZones)
     
         }
 
    @objc func doneBtnClicked(_ button: UIBarButtonItem?) {
             reuseZonesTextField?.resignFirstResponder()
             reuseZonesTextField.text = picker?.selectedValue
-        }
+            DataManager().saveJSON(privateZone)
     }
+    
+//    func updateReuseZone() {
+//        if let newValue = picker?.selectedValue {
+//            privateZone.reuseZones = Int(newValue)!
+//        }
+//        
+//    }
+        
+    
+           
+}
 
