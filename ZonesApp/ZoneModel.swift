@@ -16,6 +16,8 @@ public struct ZoneData: Codable {
     init() {
         
     }
+    
+  
 }
 
 struct NewZones: Codable {
