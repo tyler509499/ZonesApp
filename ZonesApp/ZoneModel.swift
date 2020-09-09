@@ -22,10 +22,15 @@ public struct ZoneData: Codable {
 
 struct NewZones: Codable {
     
-    var zoneNumber: Int
+    var zoneNumber: Int = 1
     var zoneName: String
     var outletNumber: Int
     
+    init (zoneNumber: Int, zoneName: String, outletNumber: Int) {
+        self.zoneNumber = zoneNumber
+        self.zoneName = zoneName
+        self.outletNumber = outletNumber
+    }
     
 }
 

@@ -17,12 +17,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     
-    //var data = DataManager.default.zoneData
-    
-    var allCellsZoneLabelText: String = ""
-    var allCellsZoneTextfieldText: String = ""
-    var allCellsOutletNumber: String = ""
-    
+    private var privateNewZone = DataManager.default.zoneData.newZones
     
     override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,77 +41,72 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    
-   
     override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-
         
     }
 
-    
-    
-   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+            return DataManager.default.zoneData.newZones.count
        }
        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as! DemoTableViewCell
-        //let zone = data[indexPath.row]
-    
-        cell.zoneLabel.text = ""//+ String(data[indexPath.row].zoneNumber)
-        cell.zoneTextField.text = ""//data[indexPath.row].zoneName
-        cell.outletTextField.text = ""//String(data[indexPath.row].outletNumber)
-        //self.tableView.reloadData()
-        return cell
+        
+        
+        if !DataManager.default.zoneData.newZones.isEmpty {
+        let zone = DataManager.default.zoneData.newZones[indexPath.row]
+        cell.zoneLabel.text = "Zone " + String(zone.zoneNumber)
+        cell.zoneTextField.text = zone.zoneName
+        cell.outletTextField.text = String(zone.outletNumber)
+        self.tableView.reloadData()
+            return cell
+        } else {
+            let zone = DataManager.default.zoneData.newZones[indexPath.row]
+            cell.zoneLabel.text = "Zone " + String(zone.zoneNumber)
+            cell.zoneTextField.text = zone.zoneName
+            cell.outletTextField.text = String(zone.outletNumber)
+            self.tableView.reloadData()
+            return cell
+        }
+
        }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
            return true
        }
        
-       //delete row by swipe
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//
-//           if editingStyle == .delete {
-//            tableView.beginUpdates()
-//            tableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
-//            tableView.endUpdates()
-//           }
-//       }
-//
+//       delete row by swipe
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+           if editingStyle == .delete {
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
+            tableView.endUpdates()
+           }
+       }
+    
+    func addNewZone(_ newValue: [NewZones]) -> [NewZones] {
+        return DataManager.default.zoneData.newZones
+    }
+
     //insert new row button
-//    @IBAction func addButtonTapped(_ sender: UIButton) {
-//        let indexPath = IndexPath(row: 1, section:0)
-//        tableView.beginUpdates()
-//        tableView.insertRows(at: [indexPath], with: .automatic)
-//        tableView.endUpdates()
-//        }
-//    }
-
-    //insert new row function
-//    func insertNewRow() {
-//
-//
-//
-//
-//        let indexPath = IndexPath(row: 1, section: 0)
-//
-//        tableView.beginUpdates()
-//        tableView.insertRows(at: [indexPath], with: .automatic)
-//        tableView.endUpdates()
-//
-//    }
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        
+        let indexPath = IndexPath(row: DataManager.default.zoneData.newZones.count - 1, section: 0)
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: [indexPath], with: .automatic)
+        self.tableView.endUpdates()
+        }
+    }
 
 
-}
+
+
+
     
     
     

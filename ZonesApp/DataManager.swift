@@ -23,6 +23,7 @@ public class DataManager {
     }
     
     
+    
     private let zoneJSONURL: URL = {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory,
         in: .userDomainMask).first!

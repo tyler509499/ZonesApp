@@ -38,17 +38,14 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
        
         reuseZonesTextField.text = String(privateZone.reuseZones)
-        
-       
-        
+    
         //Picker
         picker = MyPickerView()
         picker?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         picker?.backgroundColor = UIColor.white
         picker?.pickerData = reusePickerData
         reuseZonesTextField.inputView = picker
-        
-     
+        picker?.selectRow(DataManager.default.zoneData.reuseZones, inComponent: 0, animated: true)
         
         //Toolbar
         pickerAccessory = UIToolbar()
@@ -64,7 +61,6 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         
         addDoneClearButtonTo(reuseZonesTextField)
         
-    
     }
     
 }
@@ -103,6 +99,7 @@ extension FirstViewController {
    @objc func cancelBtnClicked(_ button: UIBarButtonItem?) {
             reuseZonesTextField?.resignFirstResponder()
             reuseZonesTextField.text = "0"
+            DataManager.default.zoneData.reuseZones = 0
     
         }
     
