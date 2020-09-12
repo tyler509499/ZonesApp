@@ -68,12 +68,11 @@
 		A10F19CB24F0CDEC007AAF96 /* ZonesApp */ = {
 			isa = PBXGroup;
 			children = (
-				A10DDE1A24FA635E0090215D /* DataManager.swift */,
-				A1E3220724F82B9800AB3F56 /* ZoneModel.swift */,
-				A1E3220624F82AFD00AB3F56 /* DemoTableViewCell */,
 				A1E79C3424F0D45100D3A82B /* ViewController */,
+				A1C65367250CC152002EA864 /* Picker */,
+				A1C65366250CC12F002EA864 /* Model and DataManager */,
+				A1E3220624F82AFD00AB3F56 /* DemoTableViewCell */,
 				A10F19CC24F0CDEC007AAF96 /* AppDelegate.swift */,
-				A1E79C3524F0EFDB00D3A82B /* MyPickerView.swift */,
 				A10F19CE24F0CDEC007AAF96 /* SceneDelegate.swift */,
 				A10F19D224F0CDEC007AAF96 /* Main.storyboard */,
 				A10F19D824F0CDED007AAF96 /* Assets.xcassets */,
@@ -81,6 +80,23 @@
 				A10F19DD24F0CDED007AAF96 /* Info.plist */,
 			);
 			path = ZonesApp;
+			sourceTree = "<group>";
+		};
+		A1C65366250CC12F002EA864 /* Model and DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				A1E3220724F82B9800AB3F56 /* ZoneModel.swift */,
+				A10DDE1A24FA635E0090215D /* DataManager.swift */,
+			);
+			path = "Model and DataManager";
+			sourceTree = "<group>";
+		};
+		A1C65367250CC152002EA864 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				A1E79C3524F0EFDB00D3A82B /* MyPickerView.swift */,
+			);
+			path = Picker;
 			sourceTree = "<group>";
 		};
 		A1E3220624F82AFD00AB3F56 /* DemoTableViewCell */ = {

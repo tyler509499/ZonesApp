@@ -47,34 +47,24 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return DataManager.default.zoneData.newZones.count
+            return 1
        }
        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as! DemoTableViewCell
         
-        
-        if !DataManager.default.zoneData.newZones.isEmpty {
         let zone = DataManager.default.zoneData.newZones[indexPath.row]
         cell.zoneLabel.text = "Zone " + String(zone.zoneNumber)
         cell.zoneTextField.text = zone.zoneName
         cell.outletTextField.text = String(zone.outletNumber)
         self.tableView.reloadData()
             return cell
-        } else {
-            let zone = DataManager.default.zoneData.newZones[indexPath.row]
-            cell.zoneLabel.text = "Zone " + String(zone.zoneNumber)
-            cell.zoneTextField.text = zone.zoneName
-            cell.outletTextField.text = String(zone.outletNumber)
-            self.tableView.reloadData()
-            return cell
-        }
-
+        
        }
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
            return true
@@ -89,15 +79,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
            }
        }
     
-    func addNewZone(_ newValue: [NewZones]) -> [NewZones] {
-        return DataManager.default.zoneData.newZones
-    }
+    
 
     //insert new row button
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
+        DataManager.default.zoneData.newZones.append(NewZones(zoneNumber: DataManager.default.zoneData.newZones.count + 1, zoneName: "", outletNumber: 0))
         let indexPath = IndexPath(row: DataManager.default.zoneData.newZones.count - 1, section: 0)
+        
         self.tableView.beginUpdates()
+        
         self.tableView.insertRows(at: [indexPath], with: .automatic)
         self.tableView.endUpdates()
         }

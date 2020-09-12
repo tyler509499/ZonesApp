@@ -28,14 +28,14 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
            }
            
           
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-               super.touchesBegan(touches, with: event)
-               
-               view.endEditing(true)
-       }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//               super.touchesBegan(touches, with: event)
+//               picker?.endEditing(true)
+//       }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
        
         reuseZonesTextField.text = String(privateZone.reuseZones)
     
@@ -46,6 +46,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         picker?.pickerData = reusePickerData
         reuseZonesTextField.inputView = picker
         picker?.selectRow(DataManager.default.zoneData.reuseZones, inComponent: 0, animated: true)
+        
+        
         
         //Toolbar
         pickerAccessory = UIToolbar()
@@ -86,8 +88,6 @@ extension FirstViewController {
                                          target: self,
                                          action: #selector(FirstViewController.doneBtnClicked(_:)))
         doneButton.tintColor = UIColor.white
-
-
         pickerAccessory?.items = [cancelButton, flexSpace, doneButton]
 
     
@@ -95,14 +95,14 @@ extension FirstViewController {
     
     
     
-
+// clear button clicked
    @objc func cancelBtnClicked(_ button: UIBarButtonItem?) {
             reuseZonesTextField?.resignFirstResponder()
             reuseZonesTextField.text = "0"
             DataManager.default.zoneData.reuseZones = 0
     
         }
-    
+ // done button clicked
    @objc func doneBtnClicked(_ button: UIBarButtonItem?) {
             reuseZonesTextField?.resignFirstResponder()
             reuseZonesTextField.text = picker?.selectedValue
@@ -113,3 +113,6 @@ extension FirstViewController {
 
 }
 }
+
+
+

@@ -10,9 +10,11 @@ import UIKit
 
 class MyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
     
-var pick: FirstViewController?
+//var pickerDataFromArray: FirstViewController?
+
     
  public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    
         if pickerData != nil {
             return pickerData!.count
         } else {
@@ -30,6 +32,7 @@ var pick: FirstViewController?
         } else {
             return ""
         }
+    
     }
 
     //Data of the picker
@@ -53,4 +56,6 @@ public var selectedValue: String {
         }
     }
 }
+    
+    
 }

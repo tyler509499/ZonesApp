@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--First View Controller-->
+        <!--My First App-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="FirstViewController" id="BYZ-38-t0r" customClass="FirstViewController" customModule="ZonesApp" sceneMemberID="viewController">
@@ -80,7 +80,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Wzd-cZ-V3K"/>
+                    <navigationItem key="navigationItem" title="My First App" largeTitleDisplayMode="never" id="Wzd-cZ-V3K" userLabel="My First App"/>
                     <connections>
                         <outlet property="newZonesTextField" destination="BX1-T0-Chq" id="khW-Ga-WA0"/>
                         <outlet property="reuseZonesTextField" destination="SVw-Z5-5II" id="1bU-ZQ-8rq"/>
