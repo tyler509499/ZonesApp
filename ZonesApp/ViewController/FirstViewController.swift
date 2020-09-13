@@ -33,12 +33,12 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         
         self.picker.reloadAllComponents()
         
-        self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
+        self.hidePickerKeyboardOnTap(#selector(self.dismissKeyboardPicker))
         
 
     }
     
-    @objc func dismissKeyboard() {
+    @objc func dismissKeyboardPicker() {
         view.endEditing(true)
        
     }
@@ -70,7 +70,7 @@ extension FirstViewController {
 
 extension FirstViewController {
     
-    func hideKeyboardOnTap(_ selector: Selector) {
+    func hidePickerKeyboardOnTap(_ selector: Selector) {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: selector)
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
