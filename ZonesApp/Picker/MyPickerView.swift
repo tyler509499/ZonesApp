@@ -8,59 +8,6 @@
 
 import UIKit
 
-//class MyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
-//
-////var pickerDataFromArray: FirstViewController?
-//
-//
-// public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//
-//        if pickerData != nil {
-//            return pickerData!.count
-//        } else {
-//            return 0
-//        }
-//    }
-//
-//    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        if pickerData != nil {
-//            return pickerData![row]
-//        } else {
-//            return ""
-//        }
-//
-//    }
-//
-//    //Data of the picker
-//
-//public var pickerData: [String]?  {
-//    didSet {
-//        super.delegate = self
-//        super.dataSource = self
-//        self.reloadAllComponents()
-//    }
-//}
-//
-////Get the selected value from picker
-//
-//public var selectedValue: String {
-//    get {
-//        if pickerData != nil {
-//            return pickerData![selectedRow(inComponent: 0)]
-//        } else {
-//            return ""
-//        }
-//    }
-//}
-//
-//
-//}
-
-// протоколы не до конца тему понял, но продолжу работать, что понять все от А до Я
 protocol PickerViewDelegate: class {
     func didTapDone()
     func didTapCancel()
@@ -72,7 +19,7 @@ class MyPickerView: UIPickerView {
     public private(set) var picker: UIPickerView?
     public weak var pickerDelegate: PickerViewDelegate?
 
-    //эти инициализаторы мне ХСОД сам предложил сделать, с ними еще не разобрался
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInitToolbar()
@@ -83,8 +30,6 @@ class MyPickerView: UIPickerView {
         self.commonInitToolbar()
     }
 
-
-    
     private func commonInitToolbar() {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
@@ -120,8 +65,6 @@ class MyPickerView: UIPickerView {
         
     }
     
-    
-
     @objc func doneTapped(_ button: UIBarButtonItem?) {
         self.pickerDelegate?.didTapDone()
     }

@@ -22,13 +22,10 @@ public class DataManager {
         }
     }
     
-    
-    
     private let zoneJSONURL: URL = {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory,
         in: .userDomainMask).first!
-        return documentsDirectory.appendingPathComponent("zone_data.json")
-   }()
+        return documentsDirectory.appendingPathComponent("zone_data.json")}()
 
     
     func loadJSON() -> ZoneData? {
