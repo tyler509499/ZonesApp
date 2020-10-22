@@ -26,12 +26,6 @@ struct NewZones: Codable {
     var zoneName: String?
     var outletNumber: Int?
     
-//    init(zoneNumber: Int, zoneName: String, outletNumber: Int) {
-//        self.zoneNumber = zoneNumber
-//        self.zoneName = zoneName
-//        self.outletNumber = outletNumber
-//    }
-    
     
 }
 

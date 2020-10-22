@@ -8,9 +8,13 @@
 
 import UIKit
 
+
+
 class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+  
     
     
+
     
 @IBOutlet public var tableView: UITableView!
     var zoneArray = [NewZones]()
@@ -47,6 +51,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return zoneArray.count
     }
+    
+    
 
        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -54,8 +60,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var zone = zoneArray[indexPath.row]
         zone.zoneNumber = indexPath.row + 1
         cell.zoneLabel.text = "Zone " + String(zone.zoneNumber!)
-       
-
+        cell.zoneTextField.placeholder = "Enter name"
+        cell.outletTextField.placeholder = "Enter number"
+        
+        
+//        cell.zoneTextField.text = zone.zoneName
+//        cell.outletTextField.text = String(zone.outletNumber ?? 0)
         return cell
         
        }
@@ -64,9 +74,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 1
     }
     
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//           return true
-//       }
+    
+    
        
 //       delete row by swipe
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -74,17 +83,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             zoneArray.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
             self.tableView.reloadData()
-            //self.perform(#selector(reloadTable), with: nil, afterDelay: 15)
            }
        }
     
-   
-    
-//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        let rowToMove = zoneArray[sourceIndexPath.row]
-//        zoneArray.remove(at: sourceIndexPath.row)
-//        zoneArray.insert(rowToMove, at: destinationIndexPath.row)
-//    }
     
     //insert new row button
     @IBAction func addButtonTapped(_ sender: UIButton) {
@@ -96,6 +97,17 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.endUpdates()
         
   }
+    //здесь я описываю сегвей от 2 контроллера к 1
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(self.zoneArray[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let firstVC = storyboard!.instantiateViewController(withIdentifier: "sendDataFromTable")  as! FirstViewController
+        let item = zoneArray[indexPath.row]
+        firstVC.arrayToJSON = [item]
+        present(firstVC, animated: true, completion: nil)
+        
+    }
 
 }
 

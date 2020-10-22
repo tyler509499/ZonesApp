@@ -8,19 +8,26 @@
 
 import UIKit
 
+
+
 class FirstViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, PickerViewDelegate {
+    
+ 
 
     @IBOutlet weak var newZonesTextField: UITextField!
     @IBOutlet weak var reuseZonesTextField: UITextField!
 
     private var privateZone = DataManager.default.zoneData
+    
 
     fileprivate let picker = MyPickerView()
     fileprivate let reusePickerData: [String] = { (0...14).map { "\($0)" }}()
-
+    var arrayToJSON = [NewZones]() //массив который мы получаем от второго контроллера
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        
         reuseZonesTextField.text = String(privateZone.reuseZones)
         
         self.reuseZonesTextField.inputView = self.picker
@@ -87,3 +94,8 @@ extension FirstViewController {
     }
 }
 
+extension FirstViewController {
+    func zoneView() {//здесь я хочу создать метод, где будет описано отображение масисва в виде строки
+        
+    }
+}
