@@ -13,11 +13,12 @@ class DemoTableViewCell: UITableViewCell {
     @IBOutlet public var zoneLabel: UILabel!
     @IBOutlet public var zoneTextField: UITextField!
     @IBOutlet public var outletTextField: UITextField!
-    
+    var array: [NewZones] = []
     
    
    
    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+                 zoneLabel.resignFirstResponder()
                  zoneTextField.resignFirstResponder()
                  outletTextField.resignFirstResponder()
                  return true

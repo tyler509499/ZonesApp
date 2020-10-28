@@ -12,23 +12,26 @@ import UIKit
 
 class FirstViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, PickerViewDelegate {
     
- 
+    var senderDelegate: SendDataToFirstVC?
 
     @IBOutlet weak var newZonesTextField: UITextField!
     @IBOutlet weak var reuseZonesTextField: UITextField!
 
     private var privateZone = DataManager.default.zoneData
+    var dataSource = [NewZones]()
     
 
     fileprivate let picker = MyPickerView()
     fileprivate let reusePickerData: [String] = { (0...14).map { "\($0)" }}()
-    var arrayToJSON = [NewZones]() //массив который мы получаем от второго контроллера
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         
+        newZonesTextField.text = dataSource.description
         reuseZonesTextField.text = String(privateZone.reuseZones)
+        
+        
         
         self.reuseZonesTextField.inputView = self.picker
         self.reuseZonesTextField.inputAccessoryView = self.picker.toolbar
@@ -44,6 +47,14 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         
 
     }
+    
+    func viewWillAppear() {
+        super.viewWillAppear(true)
+
+            if let arrayData = self.senderDelegate?.passArrayData() {
+                self.dataSource = arrayData
+            }
+        }
     
     @objc func dismissKeyboardPicker() {
         view.endEditing(true)
@@ -94,8 +105,4 @@ extension FirstViewController {
     }
 }
 
-extension FirstViewController {
-    func zoneView() {//здесь я хочу создать метод, где будет описано отображение масисва в виде строки
-        
-    }
-}
+

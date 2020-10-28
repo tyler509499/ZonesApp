@@ -86,6 +86,7 @@
                     <connections>
                         <outlet property="newZonesTextField" destination="BX1-T0-Chq" id="khW-Ga-WA0"/>
                         <outlet property="reuseZonesTextField" destination="SVw-Z5-5II" id="1bU-ZQ-8rq"/>
+                        <segue destination="HRv-wY-S5L" kind="show" identifier="sendArrayToSecond" id="kzX-l6-kz0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -116,7 +117,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="+ add new zone"/>
                                             <connections>
-                                                <action selector="addButtonTapped:" destination="HRv-wY-S5L" eventType="touchUpInside" id="I4D-pc-osR"/>
+                                                <action selector="addButtonTapped:" destination="HRv-wY-S5L" eventType="touchUpInside" id="vwA-XE-pDI"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -161,7 +162,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="2l9-EE-QXW" id="XQg-wh-2fB"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="sendDataFromTable" id="7L7-GC-iza"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="sendArrayToFirst" id="7L7-GC-iza"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdC-Vt-9bf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -207,6 +208,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="kzX-l6-kz0"/>
         <segue reference="7L7-GC-iza"/>
     </inferredMetricsTieBreakers>
     <resources>

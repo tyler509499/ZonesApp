@@ -20,7 +20,7 @@ public struct ZoneData: Codable {
   
 }
 
-struct NewZones: Codable {
+public struct NewZones: Codable {
     
     var zoneNumber: Int?
     var zoneName: String?
