@@ -36,12 +36,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reuse Zones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slv-wq-vnW">
-                                <rect key="frame" x="20" y="125" width="374" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vww-Qh-8mB">
                                 <rect key="frame" x="356" y="63" width="30" height="30"/>
                                 <constraints>
@@ -58,9 +52,15 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <segue destination="Gvh-Rs-end" kind="presentation" id="H7s-q8-x5Q"/>
+                                    <segue destination="Gvh-Rs-end" kind="presentation" identifier="sendArrayToTable" id="H7s-q8-x5Q"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reuse Zones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slv-wq-vnW">
+                                <rect key="frame" x="20" y="125" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -86,7 +86,6 @@
                     <connections>
                         <outlet property="newZonesTextField" destination="BX1-T0-Chq" id="khW-Ga-WA0"/>
                         <outlet property="reuseZonesTextField" destination="SVw-Z5-5II" id="1bU-ZQ-8rq"/>
-                        <segue destination="HRv-wY-S5L" kind="show" identifier="sendArrayToSecond" id="kzX-l6-kz0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -162,12 +161,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="2l9-EE-QXW" id="XQg-wh-2fB"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="sendArrayToFirst" id="7L7-GC-iza"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="sendArrayFromTable" id="7L7-GC-iza"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdC-Vt-9bf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="399" y="1200"/>
+            <point key="canvasLocation" x="1622" y="456"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Di-sG-PM5">
@@ -186,7 +185,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPK-V7-LnN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-84" y="-316"/>
+            <point key="canvasLocation" x="-946" y="456"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="D88-Ej-NsF">
@@ -204,11 +203,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="95r-tc-IRd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="841" y="456"/>
+            <point key="canvasLocation" x="752" y="456"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kzX-l6-kz0"/>
         <segue reference="7L7-GC-iza"/>
     </inferredMetricsTieBreakers>
     <resources>

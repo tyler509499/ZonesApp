@@ -10,16 +10,28 @@ import UIKit
 
 
 
-class FirstViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, PickerViewDelegate {
+class FirstViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, PickerViewDelegate, SendDataToFirstVCDelegate {
     
-    var senderDelegate: SendDataToFirstVC?
-
+    func sendDataToFirst(zoneArrayFromSecond: [NewZones]) {
+        dataSource = zoneArrayFromSecond
+        
+        //new zones textfield value after update
+                if !dataSource.isEmpty {
+                    newZonesTextField.text = String((dataSource.description).dropLast().dropFirst())
+                }else{
+                    newZonesTextField.text = ""
+                }
+        //save array to JSON
+        DataManager.default.zoneData.newZones = dataSource
+    }
+    
     @IBOutlet weak var newZonesTextField: UITextField!
     @IBOutlet weak var reuseZonesTextField: UITextField!
+    
 
     private var privateZone = DataManager.default.zoneData
-    var dataSource = [NewZones]()
     
+    var dataSource = [NewZones]()
 
     fileprivate let picker = MyPickerView()
     fileprivate let reusePickerData: [String] = { (0...14).map { "\($0)" }}()
@@ -27,11 +39,13 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        newZonesTextField.text = dataSource.description
+//load array from JSON
+        dataSource = DataManager.default.zoneData.newZones
+ //new zones textfield value
+        newZonesTextField.text = String((privateZone.newZones.description).dropLast().dropFirst())
+
+// reuse zones textfield value
         reuseZonesTextField.text = String(privateZone.reuseZones)
-        
-        
         
         self.reuseZonesTextField.inputView = self.picker
         self.reuseZonesTextField.inputAccessoryView = self.picker.toolbar
@@ -40,30 +54,12 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         self.picker.delegate = self
         self.picker.pickerDelegate = self
         self.picker.selectRow(DataManager.default.zoneData.reuseZones, inComponent: 0, animated: true)
-        
         self.picker.reloadAllComponents()
-        
         self.hidePickerKeyboardOnTap(#selector(self.dismissKeyboardPicker))
-        
-
     }
-    
-    func viewWillAppear() {
-        super.viewWillAppear(true)
-
-            if let arrayData = self.senderDelegate?.passArrayData() {
-                self.dataSource = arrayData
-            }
-        }
-    
-    @objc func dismissKeyboardPicker() {
-        view.endEditing(true)
-       
-    }
-    
-    
 }
 
+//picker funcs
 extension FirstViewController {
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -82,12 +78,11 @@ extension FirstViewController {
         self.reuseZonesTextField.text = self.reusePickerData[row]
         DataManager.default.zoneData.reuseZones = Int(reuseZonesTextField.text!)!
     }
-    
-
 }
 
+//picker buttons
 extension FirstViewController {
-    
+
     func hidePickerKeyboardOnTap(_ selector: Selector) {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: selector)
         tap.cancelsTouchesInView = false
@@ -103,6 +98,31 @@ extension FirstViewController {
         DataManager.default.zoneData.reuseZones = 0
         self.reuseZonesTextField.resignFirstResponder()
     }
+    
+    @objc func dismissKeyboardPicker() {
+        view.endEditing(true)
+    }
 }
 
+//segue
+extension FirstViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sendArrayToTable" {
+            if let destVC = segue.destination as? UINavigationController,
+                let targetController = destVC.topViewController as? SecondViewController {
+                targetController.zoneArray = dataSource
+                targetController.delegate = self
+            }
+        }
+    }
+    
+}
+
+//struct dispaly in textfield
+extension NewZones: CustomStringConvertible {
+    public var description: String {
+        return "\(String(zoneNumber!)). Zone \(String(zoneNumber!)) (\(String(describing: zoneName)))"
+        // (\(String(outletNumber!)))"
+    }
+}
 

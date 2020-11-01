@@ -8,37 +8,25 @@
 
 import UIKit
 
-protocol SendDataToFirstVC {
-     func passArrayData() -> [NewZones]
+protocol SendDataToFirstVCDelegate {
+     func sendDataToFirst(zoneArrayFromSecond: [NewZones])
 }
 
-class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SendDataToFirstVC{
-    
-    
-    
-    
-    
-    
-    
-    func passArrayData() -> [NewZones] {
-        return self.zoneArray
-    }
+class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 @IBOutlet public var tableView: UITableView!
     
-    var delegate: SendDataToFirstVC?
+    var delegate: SendDataToFirstVCDelegate?
     var zoneArray = [NewZones]()
 
+    
     override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
+    
     }
     
     override func viewDidLoad() {
     super.viewDidLoad()
-    
-        
-        
-        
+
         let nib = UINib(nibName: "DemoTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "DemoTableViewCell")
         tableView.delegate = self
@@ -51,13 +39,13 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBAction func doneButtonSaveReturn(_ sender: Any) {
-        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if let destVC = segue.destination as? FirstViewController {
-                    destVC.dataSource = self.zoneArray
-                }
-            }
-        self.dismiss(animated: true, completion: nil)
+        
+        self.dismiss(animated: true) {
+            
+            self.delegate?.sendDataToFirst(zoneArrayFromSecond: self.zoneArray)
+        }
     }
+    
     
     override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -65,26 +53,44 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return zoneArray.count
+        return zoneArray.count
+            
     }
-    
     
 
        
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as! DemoTableViewCell
-        
+       
         var zone = self.zoneArray[indexPath.row]
-        
-        
-        zone.zoneNumber = indexPath.row + 1
-
-        
-        cell.zoneLabel.text = "Zone " + String(zone.zoneNumber!)
         cell.zoneTextField.placeholder = "Enter name"
         cell.outletTextField.placeholder = "Enter number"
         
+        
+        
+        zone.zoneNumber = indexPath.row + 1
+        cell.zoneLabel.text = "Zone " + String(zone.zoneNumber!)
+        cell.zoneTextField.text = zone.zoneName
+        
+        
+        if zone.zoneName != nil {
+            cell.zoneTextField.text = zone.zoneName
+        
+        } else {
+            cell.zoneTextField.text = ""
+        }
+        
+        
+        if zone.outletNumber != nil {
+            cell.outletTextField.text = String(zone.outletNumber!)
+        } else {
+            cell.outletTextField.text = ""
+        }
+        
+        //zoneArray.append(NewZones(zoneNumber: zone.zoneNumber, zoneName: cell.zoneTextField.text, outletNumber: Int(cell.outletTextField.text ?? "")))
         return cell
+        
         
         
       
@@ -99,27 +105,23 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
        
 //       delete row by swipe
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-           if editingStyle == .delete {
-            zoneArray.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
-            self.tableView.reloadData()
-           }
-       }
+            if editingStyle == .delete {
+                zoneArray.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                self.tableView.reloadData()
+            }
+        }
     
     
     //insert new row button
     @IBAction func addButtonTapped(_ sender: UIButton) {
-        
         let indexPath = IndexPath(row: zoneArray.count, section: 0)
         self.tableView.beginUpdates()
         self.tableView.insertRows(at: [indexPath], with: .automatic)
-        zoneArray.append(NewZones(zoneNumber: indexPath.row + 1))
+        zoneArray.append(NewZones(zoneNumber: indexPath.row + 1, zoneName: nil, outletNumber: nil))
         self.tableView.endUpdates()
-       
-        
   }
-    //здесь я описываю сегвей от 2 контроллера к 1
-
+    
 }
 
 
