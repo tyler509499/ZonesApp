@@ -8,32 +8,35 @@
 
 import UIKit
 
-class DemoTableViewCell: UITableViewCell {
+class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet public var zoneLabel: UILabel!
     @IBOutlet public var zoneTextField: UITextField!
     @IBOutlet public var outletTextField: UITextField!
     
     
-   
-   
-   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-                 zoneLabel.resignFirstResponder()
-                 zoneTextField.resignFirstResponder()
-                 outletTextField.resignFirstResponder()
-                 return true
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            zoneTextField.resignFirstResponder()
+            outletTextField.resignFirstResponder()
+           return true
              }
+    
+   
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+            return true
+        }
              
             
-      override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                  super.touchesBegan(touches, with: event)
         
     }
     
-    
-        override func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
-            
+       
+//        zoneTextField.delegate = self
+//        outletTextField.delegate = self
         // Initialization code
     }
 
