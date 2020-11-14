@@ -18,11 +18,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var delegate: SendDataToFirstVCDelegate?
     var zoneArray = [NewZones]()
-    //var rowBeingEdited : Int? = nil
-    
-    var customCell = DemoTableViewCell()
 
-    
     override func viewDidAppear(_ animated: Bool) {
     
     }
@@ -37,7 +33,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.rowHeight = 91.0
         
-}
+    }
 
     @IBAction func doneButtonSaveReturn(_ sender: Any) {
         textFieldDidChange()
@@ -65,28 +61,21 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
        
         let zone = self.zoneArray[indexPath.row]
         
-        cell.zoneTextField.delegate = self
-        cell.outletTextField.delegate = self
+        cell.zoneTextField.delegate = cell as? UITextFieldDelegate
+        cell.outletTextField.delegate = cell as? UITextFieldDelegate
         
-        cell.zoneTextField.tag = indexPath.row
-        cell.outletTextField.tag = indexPath.row
-    
         cell.zoneTextField.placeholder = "Enter name"
         cell.outletTextField.placeholder = "Enter number"
         cell.zoneLabel.text = "Zone " + String(zone.zoneNumber!)
-        
-        
-        if zone.zoneName != nil {
+    
+        if zone.zoneName != nil && zone.outletNumber != nil{
             cell.zoneTextField.text = String(zone.zoneName!)
-        } else {
-            cell.zoneTextField.text = ""
-        }
-       
-        if zone.outletNumber != nil {
             cell.outletTextField.text = String(zone.outletNumber!)
         } else {
+            cell.zoneTextField.text = ""
             cell.outletTextField.text = ""
         }
+       
         return cell
     }
     
@@ -102,16 +91,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func textFieldDidChange() {
         for i in 0..<zoneArray.count {
-                    let indexPath = IndexPath(row: i, section: 0)
-                    let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
-                    if let zoneText = cell?.zoneTextField.text {
+            let indexPath = IndexPath(row: i, section: 0)
+            let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
+                    if let zoneText = cell?.zoneTextField.text, let outletText = cell?.outletTextField.text {
                         zoneArray[i].zoneName = zoneText
+                        zoneArray[i].outletNumber = Int(outletText)
+                        
                     }
-            if let outletText = cell?.outletTextField.text {
-                zoneArray[i].outletNumber = Int(outletText)
             }
         }
-    }
+    
     
 //       delete row by swipe
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -138,6 +127,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
 }
+
+
+
 
 
     

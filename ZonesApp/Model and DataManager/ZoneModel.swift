@@ -14,18 +14,23 @@ public struct ZoneData: Codable {
     var reuseZones: Int = 0
     
     init() {
-        
+
     }
     
   
 }
 
-public struct NewZones: Codable {
+public class NewZones: Codable {
     
     var zoneNumber: Int?
     var zoneName: String?
     var outletNumber: Int?
     
+    init(zoneNumber: Int?, zoneName: String?, outletNumber: Int?){
+        self.zoneNumber = zoneNumber
+        self.zoneName = zoneName
+        self.outletNumber = outletNumber
+    }
     
 }
 

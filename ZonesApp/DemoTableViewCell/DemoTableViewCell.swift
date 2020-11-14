@@ -8,12 +8,11 @@
 
 import UIKit
 
-class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
+class DemoTableViewCell: UITableViewCell {
     
     @IBOutlet public var zoneLabel: UILabel!
     @IBOutlet public var zoneTextField: UITextField!
     @IBOutlet public var outletTextField: UITextField!
-    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             zoneTextField.resignFirstResponder()
@@ -21,31 +20,26 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
            return true
              }
     
-   
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
             return true
         }
              
-            
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                  super.touchesBegan(touches, with: event)
-        
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       
-//        zoneTextField.delegate = self
-//        outletTextField.delegate = self
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
-    
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        zoneTextField.text = nil
+        outletTextField.text = nil
+    }
 }
