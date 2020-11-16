@@ -10,12 +10,12 @@ import Foundation
 
 
 public class DataManager {
-
+    
     static var `default` = DataManager()
     
     var zoneData: ZoneData{
         get {
-           return loadJSON() ?? ZoneData()
+            return loadJSON() ?? ZoneData()
         }
         set {
             saveJSON(newValue)
@@ -24,9 +24,9 @@ public class DataManager {
     
     private let zoneJSONURL: URL = {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory,
-        in: .userDomainMask).first!
+                                                          in: .userDomainMask).first!
         return documentsDirectory.appendingPathComponent("zone_data.json")}()
-
+    
     
     func loadJSON() -> ZoneData? {
         do {
@@ -39,7 +39,7 @@ public class DataManager {
     }
     
     func saveJSON(_ zoneData: ZoneData) {
-      
+        
         do {
             let data = try JSONEncoder().encode(zoneData)
             try data.write(to: zoneJSONURL)
@@ -47,5 +47,5 @@ public class DataManager {
             print(error)
         }
         
-}
+    }
 }

@@ -15,7 +15,7 @@ protocol SendDataToFirstVCDelegate {
 class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     @IBOutlet public var tableView: UITableView!
-    
+
     var delegate: SendDataToFirstVCDelegate?
     var zoneArray = [NewZones]()
     var checkComplete: Bool = true
@@ -26,15 +26,34 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        //zoneArray.removeAll()
+        //custom cell nib
+        
         let nib = UINib(nibName: "DemoTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "DemoTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 91.0
+       
         
     }
+    
+    
+  //show keyboard func
+    @objc private func keyboardWillShow(notification: NSNotification) {
+           if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+               tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + tableView.rowHeight, right: 0)
+           }
+       }
+//hide keyboard func
+    @objc private func keyboardWillHide(notification: NSNotification) {
+           tableView.contentInset = .zero
+       }
+    
+    
     //button save to array and send array to firsv controller
     @IBAction func doneButtonSaveReturn(_ sender: Any) {
         textFieldDidChange()

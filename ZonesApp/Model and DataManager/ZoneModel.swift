@@ -9,15 +9,15 @@
 import Foundation
 
 public struct ZoneData: Codable {
-
+    
     var newZones: [NewZones] = []
     var reuseZones: Int = 0
     
     init() {
-
+        
     }
     
-  
+    
 }
 
 public class NewZones: Codable {
@@ -34,6 +34,6 @@ public class NewZones: Codable {
     
 }
 
-    
-    
-    
+
+
+
