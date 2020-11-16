@@ -121,7 +121,7 @@ extension FirstViewController {
 //struct dispaly in textfield
 extension NewZones: CustomStringConvertible {
     public var description: String {
-        return "\(String(zoneNumber!)). Zone \(String(zoneNumber!)) (\(zoneName!))(\(outletNumber ?? 0))"
+        return "\(zoneNumber!). Zone \(zoneNumber!) (\(zoneName!))(\(outletNumber!))"
       
         
        

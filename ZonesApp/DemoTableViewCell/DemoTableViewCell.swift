@@ -30,6 +30,7 @@ class DemoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,5 +42,29 @@ class DemoTableViewCell: UITableViewCell {
         super.prepareForReuse()
         zoneTextField.text = nil
         outletTextField.text = nil
+    }
+    
+    func addDoneButtonTo(_ textField: UITextField) {
+        
+        let doneToolbar = UIToolbar()
+        outletTextField.inputAccessoryView = doneToolbar
+        zoneTextField.inputAccessoryView = doneToolbar
+        doneToolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title:"Done",
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(didTapDone))
+        
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                            target: nil,
+                                            action: nil)
+    
+        doneToolbar.items = [flexBarButton, doneButton]
+        
+    }
+    
+    @objc private func didTapDone() {
+        endEditing(true)
     }
 }
