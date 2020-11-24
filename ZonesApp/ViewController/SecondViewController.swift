@@ -19,6 +19,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var delegate: SendDataToFirstVCDelegate?
     var zoneArray = [NewZones]()
     var checkComplete: Bool = true
+
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -37,6 +38,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 91.0
+        
        
         
     }
@@ -44,12 +46,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
   //show keyboard func
     @objc private func keyboardWillShow(notification: NSNotification) {
+        textFieldDidChange()
            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + tableView.rowHeight, right: 0)
+            
+            
            }
        }
 //hide keyboard func
     @objc private func keyboardWillHide(notification: NSNotification) {
+        
            tableView.contentInset = .zero
        }
     
@@ -86,9 +92,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let zone = self.zoneArray[indexPath.row]
         
-        cell.zoneTextField.delegate = cell as? UITextFieldDelegate
-        cell.outletTextField.delegate = cell as? UITextFieldDelegate
-        
         cell.addDoneButtonTo(cell.zoneTextField)
         cell.addDoneButtonTo(cell.outletTextField)
         
@@ -96,16 +99,42 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.outletTextField.placeholder = "Enter number"
         cell.zoneLabel.text = "Zone " + String(zone.zoneNumber!)
         
-        if zone.zoneName != nil && zone.outletNumber != nil{
-            cell.zoneTextField.text = String(zone.zoneName!)
-            cell.outletTextField.text = String(zone.outletNumber!)
-        } else {
-            cell.zoneTextField.text = ""
-            cell.outletTextField.text = ""
+        
+        cell.zoneTextField.delegate = self
+        cell.outletTextField.delegate = self
+    
+        
+        if zone.zoneName != nil {
+            cell.zoneTextField.text = zone.zoneName
         }
         
+        if zone.outletNumber != nil {
+            cell.outletTextField.text = String(zone.outletNumber!)
+        }
+        
+       
+       
+        
+        
         return cell
+            
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        for i in 0..<zoneArray.count {
+            let indexPath = IndexPath(row: i, section: 0)
+            let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
+            let zone = self.zoneArray[indexPath.row]
+            zone.zoneName = cell?.zoneTextField.text
+            zone.outletNumber = Int(cell?.outletTextField.text ?? "")
+            
+//            if !zoneArray.isEmpty {
+//                cell?.zoneTextField.text = zoneArray[i].zoneName
+//                cell?.outletTextField.text = String(zoneArray[i].outletNumber ?? 0)
+//            }
+    }
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -157,6 +186,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    
+    
     //       delete row by swipe
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
@@ -171,10 +202,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     //      insert new row button
     @IBAction func addButtonTapped(_ sender: UIButton) {
-        
         let indexPath = IndexPath(row: self.zoneArray.count, section: 0)
-        zoneArray.append(NewZones(zoneNumber: indexPath.row + 1, zoneName: nil, outletNumber: nil))
+        zoneArray.append(NewZones(zoneNumber: indexPath.row + 1, zoneName: nil , outletNumber: nil))
         self.tableView.insertRows(at: [indexPath], with: .automatic)
+        
         
     }
     //allert for textfields func

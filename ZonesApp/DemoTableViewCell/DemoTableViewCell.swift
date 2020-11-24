@@ -8,17 +8,29 @@
 
 import UIKit
 
-class DemoTableViewCell: UITableViewCell {
+class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet public var zoneLabel: UILabel!
     @IBOutlet public var zoneTextField: UITextField!
     @IBOutlet public var outletTextField: UITextField!
+    var myTable = SecondViewController()
+  
+ 
+   
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            zoneTextField.resignFirstResponder()
-            outletTextField.resignFirstResponder()
+            
            return true
              }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.zoneTextField.text = nil
+        self.outletTextField.text = nil
+
+        
+    }
+    
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
             return true
@@ -36,12 +48,6 @@ class DemoTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        zoneTextField.text = nil
-        outletTextField.text = nil
     }
     
     func addDoneButtonTo(_ textField: UITextField) {
@@ -64,7 +70,11 @@ class DemoTableViewCell: UITableViewCell {
         
     }
     
-    @objc private func didTapDone() {
-        endEditing(true)
+    @objc private func didTapDone(_ selector: Selector) {
+        
+        zoneTextField.resignFirstResponder()
+        outletTextField.resignFirstResponder()
+        
+        
     }
 }
