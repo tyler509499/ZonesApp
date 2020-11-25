@@ -19,6 +19,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var delegate: SendDataToFirstVCDelegate?
     var zoneArray = [NewZones]()
     var checkComplete: Bool = true
+    
 
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,10 +36,11 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let nib = UINib(nibName: "DemoTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "DemoTableViewCell")
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 91.0
-        
+       
        
         
     }
@@ -88,7 +90,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as! DemoTableViewCell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as? DemoTableViewCell else {
+             return UITableViewCell()
+        }
         
         let zone = self.zoneArray[indexPath.row]
         
@@ -97,13 +102,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.zoneTextField.placeholder = "Enter name"
         cell.outletTextField.placeholder = "Enter number"
-        cell.zoneLabel.text = "Zone " + String(zone.zoneNumber!)
-        
         
         cell.zoneTextField.delegate = self
         cell.outletTextField.delegate = self
-    
         
+        cell.zoneLabel.text = "Zone " + String(zone.zoneNumber!)
+    
         if zone.zoneName != nil {
             cell.zoneTextField.text = zone.zoneName
         }
@@ -125,13 +129,17 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let indexPath = IndexPath(row: i, section: 0)
             let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
             let zone = self.zoneArray[indexPath.row]
+            
+            guard cell?.zoneTextField.text != nil else {
+                        return
+                    }
+            guard cell?.outletTextField.text != nil else {
+                return
+            }
             zone.zoneName = cell?.zoneTextField.text
             zone.outletNumber = Int(cell?.outletTextField.text ?? "")
             
-//            if !zoneArray.isEmpty {
-//                cell?.zoneTextField.text = zoneArray[i].zoneName
-//                cell?.outletTextField.text = String(zoneArray[i].outletNumber ?? 0)
-//            }
+
     }
     }
     

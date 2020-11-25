@@ -8,13 +8,13 @@
 
 import UIKit
 
+
 class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet public var zoneLabel: UILabel!
     @IBOutlet public var zoneTextField: UITextField!
     @IBOutlet public var outletTextField: UITextField!
-    var myTable = SecondViewController()
-  
+   
  
    
     
@@ -27,8 +27,6 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.prepareForReuse()
         self.zoneTextField.text = nil
         self.outletTextField.text = nil
-
-        
     }
     
     
