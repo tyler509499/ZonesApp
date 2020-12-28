@@ -20,6 +20,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var zoneArray = [NewZones]()
     var checkComplete: Bool = true
     
+    
 
     
     override func viewDidAppear(_ animated: Bool) {
@@ -28,6 +29,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //keyboard Observer
     
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -40,6 +43,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 91.0
+        
+        
+   
        
        
         
@@ -48,23 +54,25 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
   //show keyboard func
     @objc private func keyboardWillShow(notification: NSNotification) {
-        textFieldDidChange()
+        
            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
                tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + tableView.rowHeight, right: 0)
             
             
            }
+
        }
 //hide keyboard func
     @objc private func keyboardWillHide(notification: NSNotification) {
         
            tableView.contentInset = .zero
+        
        }
     
     
     //button save to array and send array to firsv controller
     @IBAction func doneButtonSaveReturn(_ sender: Any) {
-        textFieldDidChange()
         checkEmptyFields()
         if checkComplete == true {
             self.dismiss(animated: true) {
@@ -97,8 +105,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let zone = self.zoneArray[indexPath.row]
         
-        cell.addDoneButtonTo(cell.zoneTextField)
-        cell.addDoneButtonTo(cell.outletTextField)
+        cell.addDoneButtonToZone(cell.zoneTextField)
+        cell.addDoneButtonToOutlet(cell.outletTextField)
         
         cell.zoneTextField.placeholder = "Enter name"
         cell.outletTextField.placeholder = "Enter number"
@@ -106,19 +114,23 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.zoneTextField.delegate = self
         cell.outletTextField.delegate = self
         
+        cell.zoneTextField.tag = indexPath.row
+        cell.outletTextField.tag = indexPath.row
+        
         cell.zoneLabel.text = "Zone " + String(zone.zoneNumber!)
+        
     
         if zone.zoneName != nil {
             cell.zoneTextField.text = zone.zoneName
+        } else {
+            cell.zoneTextField.text = ""
         }
-        
+
         if zone.outletNumber != nil {
             cell.outletTextField.text = String(zone.outletNumber!)
+        } else {
+            cell.outletTextField.text = ""
         }
-        
-       
-       
-        
         
         return cell
             
@@ -130,17 +142,14 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
             let zone = self.zoneArray[indexPath.row]
             
-            guard cell?.zoneTextField.text != nil else {
-                        return
-                    }
-            guard cell?.outletTextField.text != nil else {
-                return
+            if cell?.zoneTextField.text != nil {
+                zone.zoneName = cell?.zoneTextField.text
             }
-            zone.zoneName = cell?.zoneTextField.text
-            zone.outletNumber = Int(cell?.outletTextField.text ?? "")
             
-
-    }
+            if cell?.outletTextField.text != nil {
+                zone.outletNumber = Int(cell?.outletTextField.text ?? "")
+            }
+        }
     }
     
     
@@ -155,44 +164,48 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    //insert textfield.text value in array
-    func textFieldDidChange() {
-        for i in 0..<zoneArray.count {
-            let indexPath = IndexPath(row: i, section: 0)
-            let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
-            if let zoneText = cell?.zoneTextField.text, let outletText = cell?.outletTextField.text {
-                zoneArray[i].zoneName = zoneText
-                zoneArray[i].outletNumber = Int(outletText)
-            }
-        }
-    }
+    
+    
+    
     //check textfields for nil, if true - alert
     
     func checkEmptyFields() {
         for i in 0..<zoneArray.count {
-            //let zone = self.zoneArray[i]
+            
             let indexPath = IndexPath(row: i, section: 0)
             let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
-            if cell?.zoneTextField.text == ""{
-                cell?.zoneTextField.becomeFirstResponder()
-                checkComplete = false
-                showAlert(title: "Empty Zone Name", message: "Enter the name of the Zone \(zoneArray[i].zoneNumber!)")
-                return
-                
+            let zone = self.zoneArray[indexPath.row]
+        
+            if zone.zoneName == nil {
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             } else {
                 checkComplete = true
             }
-            if cell?.outletTextField.text == "" {
-                cell?.outletTextField.becomeFirstResponder()
+                if cell?.zoneTextField.text == "" {
                 checkComplete = false
-                showAlert(title: "Empty No. of Outlet", message: "Enter the outlet's number of the Zone \(zoneArray[i].zoneNumber!)")
-                return
+                cell?.zoneTextField.becomeFirstResponder()
+                showAlert(title: "Empty Zone Name", message: "Enter the name of the Zone \(zone.zoneNumber!)")
+                    return
+            
+            }
+
+            if zone.outletNumber == nil {
                 
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             } else {
                 checkComplete = true
+            }
+                if cell?.outletTextField.text == "" {
+                checkComplete = false
+                cell?.outletTextField.becomeFirstResponder()
+                showAlert(title: "Empty No. of Outlet", message: "Enter the outlet's number of the Zone \(zone.zoneNumber!)")
+                    return
+            
             }
         }
     }
+    
+    
     
     
     

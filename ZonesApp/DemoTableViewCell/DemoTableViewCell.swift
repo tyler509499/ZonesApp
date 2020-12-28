@@ -14,6 +14,8 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet public var zoneLabel: UILabel!
     @IBOutlet public var zoneTextField: UITextField!
     @IBOutlet public var outletTextField: UITextField!
+    
+
    
  
    
@@ -27,6 +29,7 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.prepareForReuse()
         self.zoneTextField.text = nil
         self.outletTextField.text = nil
+
     }
     
     
@@ -48,17 +51,16 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     }
     
-    func addDoneButtonTo(_ textField: UITextField) {
+    func addDoneButtonToZone(_ textField: UITextField) {
         
         let doneToolbar = UIToolbar()
-        outletTextField.inputAccessoryView = doneToolbar
         zoneTextField.inputAccessoryView = doneToolbar
         doneToolbar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title:"Done",
                                          style: .done,
                                          target: self,
-                                         action: #selector(didTapDone))
+                                         action: #selector(didTapDoneZone))
         
         let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                             target: nil,
@@ -68,11 +70,40 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
         
     }
     
-    @objc private func didTapDone(_ selector: Selector) {
+    @objc private func didTapDoneZone(_ selector: Selector) {
+
+        zoneTextField.endEditing(true)
         
-        zoneTextField.resignFirstResponder()
-        outletTextField.resignFirstResponder()
+       
         
+        
+    }
+    
+    
+    func addDoneButtonToOutlet(_ textField: UITextField) {
+        
+        let doneToolbar = UIToolbar()
+        outletTextField.inputAccessoryView = doneToolbar
+        doneToolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title:"Done",
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(didTapDoneOutlet))
+        
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                            target: nil,
+                                            action: nil)
+    
+        doneToolbar.items = [flexBarButton, doneButton]
+        
+    }
+    
+    @objc private func didTapDoneOutlet(_ selector: Selector) {
+
+        outletTextField.endEditing(true)
+     
+      
         
     }
 }
