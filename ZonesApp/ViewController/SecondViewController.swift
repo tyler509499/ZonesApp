@@ -21,11 +21,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var checkComplete: Bool = true
     
     
-
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +38,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 91.0
+        //tableView.isScrollEnabled = true
         
         
    
@@ -73,7 +69,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //button save to array and send array to firsv controller
     @IBAction func doneButtonSaveReturn(_ sender: Any) {
+        
         checkEmptyFields()
+        
         if checkComplete == true {
             self.dismiss(animated: true) {
                 self.delegate?.sendDataToFirst(zoneArrayFromSecond: self.zoneArray)
@@ -136,6 +134,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
     }
     
+  
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        textField.becomeFirstResponder()
+//    }
+    
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         for i in 0..<zoneArray.count {
             let indexPath = IndexPath(row: i, section: 0)
@@ -164,46 +168,81 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    
+   
     
     
     //check textfields for nil, if true - alert
     
     func checkEmptyFields() {
-        for i in 0..<zoneArray.count {
-            
-            let indexPath = IndexPath(row: i, section: 0)
-            let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
-            let zone = self.zoneArray[indexPath.row]
         
-            if zone.zoneName == nil {
+  
+        for i in 0..<zoneArray.count {
+
+            let indexPath = IndexPath(row: i, section: 0)
+            let zone = self.zoneArray[indexPath.row]
+            let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
+            
+
+            if zone.zoneName == nil || zone.zoneName == "" {
+                checkComplete = false
+                showAlert(title: "Empty Zone Name", message: "Enter the name of the Zone \(zone.zoneNumber!)")
                 self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    cell?.zoneTextField.becomeFirstResponder()
+                }
+           break
             } else {
                 checkComplete = true
-            }
-                if cell?.zoneTextField.text == "" {
-                checkComplete = false
-                cell?.zoneTextField.becomeFirstResponder()
-                showAlert(title: "Empty Zone Name", message: "Enter the name of the Zone \(zone.zoneNumber!)")
-                    return
-            
+
             }
 
-            if zone.outletNumber == nil {
-                
-                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-            } else {
-                checkComplete = true
-            }
-                if cell?.outletTextField.text == "" {
-                checkComplete = false
-                cell?.outletTextField.becomeFirstResponder()
-                showAlert(title: "Empty No. of Outlet", message: "Enter the outlet's number of the Zone \(zone.zoneNumber!)")
-                    return
-            
-            }
-        }
     }
+    }
+                
+//        for i in 0..<zoneArray.count {
+//            let indexPath = IndexPath(row: i, section: 0)
+//            let zone = self.zoneArray[indexPath.row]
+//            let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
+//
+//            switch zone.zoneName {
+//            case nil:
+//                cell?.zoneTextField.tag = indexPath.row
+//                checkComplete = false
+//                showAlert(title: "Empty Zone Name", message: "Enter the name of the Zone \(zone.zoneNumber!)")
+//                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+//                cell?.zoneTextField.becomeFirstResponder()}
+//                break
+//            case "":
+//                cell?.zoneTextField.tag = indexPath.row
+//                checkComplete = false
+//                showAlert(title: "Empty Zone Name", message: "Enter the name of the Zone \(zone.zoneNumber!)")
+//                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+//                cell?.zoneTextField.becomeFirstResponder()}
+//                break
+//            default:
+//                checkComplete = true
+//            }
+//        }
+//
+//
+//
+//    }
+
+//            if zone.outletNumber == nil {
+//                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+//            } else {
+//                checkComplete = true
+//            }
+//                if cell?.outletTextField.text == "" {
+//                checkComplete = false
+//                cell?.outletTextField.becomeFirstResponder()
+//                showAlert(title: "Empty No. of Outlet", message: "Enter the outlet's number of the Zone \(zone.zoneNumber!)")
+//                    return
+//
+  
     
     
     
@@ -221,6 +260,11 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
+    
+   
+    
+    
+    
     //      insert new row button
     @IBAction func addButtonTapped(_ sender: UIButton) {
         let indexPath = IndexPath(row: self.zoneArray.count, section: 0)
@@ -231,8 +275,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     //allert for textfields func
     public func showAlert(title: String, message: String) {
+        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }

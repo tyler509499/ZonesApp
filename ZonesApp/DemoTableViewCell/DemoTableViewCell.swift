@@ -9,7 +9,7 @@
 import UIKit
 
 
-class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
+class DemoTableViewCell: UITableViewCell, UITextFieldDelegate, UIScrollViewDelegate {
     
     @IBOutlet public var zoneLabel: UILabel!
     @IBOutlet public var zoneTextField: UITextField!
@@ -32,6 +32,11 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        zoneTextField.delegate = self
+        outletTextField.delegate = self
+        return true
+    }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
             return true
@@ -73,11 +78,10 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     @objc private func didTapDoneZone(_ selector: Selector) {
 
         zoneTextField.endEditing(true)
-        
-       
-        
-        
+    
     }
+    
+    
     
     
     func addDoneButtonToOutlet(_ textField: UITextField) {
@@ -106,4 +110,7 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
       
         
     }
+    
+   
+
 }
