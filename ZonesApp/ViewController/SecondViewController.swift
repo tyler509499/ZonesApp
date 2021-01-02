@@ -19,7 +19,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var delegate: SendDataToFirstVCDelegate?
     var zoneArray = [NewZones]()
     var checkComplete: Bool = true
-    
+
     
     
     override func viewDidLoad() {
@@ -185,12 +185,15 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
             if zone.zoneName == nil || zone.zoneName == "" {
                 checkComplete = false
-                showAlert(title: "Empty Zone Name", message: "Enter the name of the Zone \(zone.zoneNumber!)")
-                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                let alert = UIAlertController(title: "Empty Zone Name", message: "Enter the name of the Zone \(zone.zoneNumber!)", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
+                    self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25){
                     cell?.zoneTextField.becomeFirstResponder()
-                }
+                    }
+                    })
+                        alert.addAction(okAction)
            break
             } else {
                 checkComplete = true
@@ -274,13 +277,21 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     //allert for textfields func
-    public func showAlert(title: String, message: String) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
-    }
+
+//    public func showAlert(title: String, message: String) {
+//
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
+//            var indexPath = IndexPath(row: 0, section: 0)
+//            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+//
+//
+//
+//
+//        })
+//        alert.addAction(okAction)
+//        self.present(alert, animated: true, completion: nil)
+//    }
 }
 
 
