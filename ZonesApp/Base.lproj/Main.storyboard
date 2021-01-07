@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7nS-lc-C7i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7nS-lc-C7i">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,7 +23,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BX1-T0-Chq">
-                                <rect key="frame" x="20" y="117" width="374" height="34"/>
+                                <rect key="frame" x="20" y="117" width="352" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="jBn-b7-SSw"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -36,17 +38,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reuse Zones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slv-wq-vnW">
+                                <rect key="frame" x="20" y="181" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vww-Qh-8mB">
-                                <rect key="frame" x="356" y="119" width="30" height="30"/>
+                                <rect key="frame" x="372" y="117" width="22" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Y3A-BX-o8r"/>
-                                    <constraint firstAttribute="width" constant="30" id="lGp-Eu-DSi"/>
+                                    <constraint firstAttribute="height" constant="34" id="Sia-gP-gsg"/>
+                                    <constraint firstAttribute="width" constant="22" id="lS5-Sf-VyS"/>
                                 </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="&gt;">
                                             <attributes>
                                                 <font key="NSFont" metaFont="system" size="15"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -55,31 +64,25 @@
                                     <segue destination="Gvh-Rs-end" kind="presentation" identifier="sendArrayToTable" id="H7s-q8-x5Q"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reuse Zones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slv-wq-vnW">
-                                <rect key="frame" x="20" y="181" width="374" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VBs-xQ-wv6" secondAttribute="trailing" constant="20" id="2Wa-4b-LuK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BX1-T0-Chq" secondAttribute="trailing" constant="42" id="78k-og-D2m"/>
                             <constraint firstItem="BX1-T0-Chq" firstAttribute="top" secondItem="VBs-xQ-wv6" secondAttribute="bottom" constant="15" id="C1D-F8-go0"/>
                             <constraint firstItem="VBs-xQ-wv6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="25" id="Kpf-6i-vZr"/>
-                            <constraint firstItem="BX1-T0-Chq" firstAttribute="trailing" secondItem="SVw-Z5-5II" secondAttribute="trailing" id="Mcg-QX-jIY"/>
-                            <constraint firstItem="Vww-Qh-8mB" firstAttribute="top" secondItem="BX1-T0-Chq" secondAttribute="bottom" constant="-32" id="Nat-RH-cxY"/>
-                            <constraint firstItem="Vww-Qh-8mB" firstAttribute="leading" secondItem="BX1-T0-Chq" secondAttribute="trailing" constant="-38" id="OSD-xF-26R"/>
                             <constraint firstItem="BX1-T0-Chq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VBs-xQ-wv6" secondAttribute="leading" id="QpL-sE-x3B"/>
                             <constraint firstItem="BX1-T0-Chq" firstAttribute="leading" secondItem="slv-wq-vnW" secondAttribute="leading" id="SYL-DP-IiJ"/>
                             <constraint firstItem="SVw-Z5-5II" firstAttribute="top" secondItem="slv-wq-vnW" secondAttribute="bottom" constant="16" id="SZm-m7-05e"/>
                             <constraint firstItem="VBs-xQ-wv6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="cN4-UK-HgZ"/>
+                            <constraint firstItem="Vww-Qh-8mB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="61" id="cXU-9e-4rZ"/>
                             <constraint firstItem="slv-wq-vnW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="125" id="cqT-kq-J9B"/>
                             <constraint firstItem="slv-wq-vnW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="hgZ-y5-tQi"/>
                             <constraint firstItem="SVw-Z5-5II" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="jMX-tF-0Xh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SVw-Z5-5II" secondAttribute="trailing" constant="20" id="kDu-i0-yj2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="slv-wq-vnW" secondAttribute="trailing" constant="20" id="leE-Br-FIo"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vww-Qh-8mB" secondAttribute="trailing" constant="20" id="sfh-fP-ZxR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="ZonesApp" largeTitleDisplayMode="never" id="Wzd-cZ-V3K" userLabel="My First App"/>
@@ -128,7 +131,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DemoTableViewCell" rowHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="zEt-6B-gxg" customClass="DemoTableViewCell" customModule="ZonesApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DemoTableViewCell" rowHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="zEt-6B-gxg" customClass="DemoTableViewCell" customModule="ZonesApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zEt-6B-gxg" id="O9S-BS-I2Z" customClass="DemoTableViewCell" customModule="ZonesApp" customModuleProvider="target">
