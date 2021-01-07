@@ -23,7 +23,7 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet public var zoneLabel: UILabel!
     @IBOutlet public var zoneTextField: UITextField!
     @IBOutlet public var outletTextField: UITextField!
-    weak var weakModel: SecondViewController?
+    weak var weakModel: NewZones?
     
     var cellZoneDelegate: ZoneTableViewCellDelegate?
     var cellOutletDelegate: OutletTableViewCellDelegate?
@@ -37,11 +37,11 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     func modelToTableViewUpdate() {
         
         zoneTextField.text = weakModel?.zoneArrayNewZones(zoneName)]
-//        if let _ = weakModel?.outletNumber {
-//            outletTextField.text = String((weakModel?.outletNumber)!)
-//        } else {
-//            outletTextField.text = ""
-//        }
+        if let _ = weakModel?.outletNumber {
+            outletTextField.text = String((weakModel?.outletNumber)!)
+        } else {
+            outletTextField.text = ""
+        }
           
     }
     
@@ -54,6 +54,7 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         cellZoneDelegate?.getTextFieldZoneString(zoneString: self.zoneTextField.text!)
         cellOutletDelegate?.getTextFieldOutletString(outletString: self.outletTextField.text!)
     }
