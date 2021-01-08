@@ -122,11 +122,6 @@ extension FirstViewController {
 extension NewZones: CustomStringConvertible {
     public var description: String {
         return "\(zoneNumber!). Zone \(zoneNumber!) (\(zoneName!))(\(outletNumber!))"
-        
-        
-        
-        
-        
     }
 }
 

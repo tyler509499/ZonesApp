@@ -8,16 +8,6 @@
 
 import UIKit
 
-protocol ZoneTableViewCellDelegate {
-    func getTextFieldZoneString(zoneString: String)
-}
-
-protocol OutletTableViewCellDelegate {
-    func getTextFieldOutletString(outletString: String)
-}
-
-
-
 class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet public var zoneLabel: UILabel!
@@ -25,63 +15,47 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet public var outletTextField: UITextField!
     weak var weakModel: NewZones?
     
-    var cellZoneDelegate: ZoneTableViewCellDelegate?
-    var cellOutletDelegate: OutletTableViewCellDelegate?
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.zoneTextField.delegate = self
-        self.outletTextField.delegate = self
-           return true
-             }
-    
-    func modelToTableViewUpdate() {
-        
-        zoneTextField.text = weakModel?.zoneArrayNewZones(zoneName)]
-        if let _ = weakModel?.outletNumber {
-            outletTextField.text = String((weakModel?.outletNumber)!)
-        } else {
-            outletTextField.text = ""
-        }
-          
-    }
-    
-    
     override func prepareForReuse() {
-        
         self.zoneTextField.text = nil
         self.outletTextField.text = nil
+        weakModel = nil
         super.prepareForReuse()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        cellZoneDelegate?.getTextFieldZoneString(zoneString: self.zoneTextField.text!)
-        cellOutletDelegate?.getTextFieldOutletString(outletString: self.outletTextField.text!)
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        self.zoneTextField.delegate = self
-        self.outletTextField.delegate = self
-        return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-      
-            return true
+        if textField == zoneTextField{
+            weakModel?.zoneName = zoneTextField.text ?? ""
         }
-             
+        if textField == outletTextField{
+            weakModel?.outletNumber = Int(outletTextField.text ?? "")
+        }
+    }
+    
+    func modelToTableViewUpdate(_ myModel: NewZones) {
+        
+        zoneTextField.text = myModel.zoneName ?? ""
+        if myModel.outletNumber != nil {
+            outletTextField.text = String(myModel.outletNumber!)
+        } else {
+            outletTextField.text = ""
+        }
+        weakModel = myModel
+    }
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-                 super.touchesBegan(touches, with: event)
+        super.touchesBegan(touches, with: event)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         if (self.zoneTextField != nil) {
-                self.zoneTextField.delegate = self as UITextFieldDelegate
-            }
+            self.zoneTextField.delegate = self as UITextFieldDelegate
+        }
         if (self.outletTextField != nil) {
-                self.outletTextField.delegate = self as UITextFieldDelegate
-            }
+            self.outletTextField.delegate = self as UITextFieldDelegate
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -102,14 +76,14 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
         let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                             target: nil,
                                             action: nil)
-    
+        
         doneToolbar.items = [flexBarButton, doneButton]
     }
     
     @objc private func didTapDoneZone(_ selector: Selector) {
         zoneTextField.endEditing(true)
     }
-
+    
     func addDoneButtonToOutlet(_ textField: UITextField) {
         
         let doneToolbar = UIToolbar()
@@ -124,7 +98,7 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
         let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                             target: nil,
                                             action: nil)
-    
+        
         doneToolbar.items = [flexBarButton, doneButton]
     }
     
