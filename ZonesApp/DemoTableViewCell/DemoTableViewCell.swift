@@ -15,9 +15,10 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet public var outletTextField: UITextField!
     weak var weakModel: NewZones?
     
+    
     override func prepareForReuse() {
-        self.zoneTextField.text = nil
-        self.outletTextField.text = nil
+        zoneTextField.text = nil
+        outletTextField.text = nil
         weakModel = nil
         super.prepareForReuse()
     }
@@ -33,13 +34,18 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func modelToTableViewUpdate(_ myModel: NewZones) {
         
+        weakModel = myModel
+        
+        zoneLabel.text = "Zone " + String(myModel.zoneNumber!)
         zoneTextField.text = myModel.zoneName ?? ""
         if myModel.outletNumber != nil {
             outletTextField.text = String(myModel.outletNumber!)
         } else {
             outletTextField.text = ""
         }
-        weakModel = myModel
+        
+        addDoneButtonToZone(zoneTextField)
+        addDoneButtonToOutlet(outletTextField)
     }
     
     
@@ -50,19 +56,22 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if (self.zoneTextField != nil) {
-            self.zoneTextField.delegate = self as UITextFieldDelegate
+        if (zoneTextField != nil) {
+            zoneTextField.delegate = self
+            zoneTextField.placeholder = "Enter name"
         }
-        if (self.outletTextField != nil) {
-            self.outletTextField.delegate = self as UITextFieldDelegate
+        if (outletTextField != nil) {
+            outletTextField.delegate = self
+            outletTextField.placeholder = "Enter number"
         }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+       
     }
     
-    func addDoneButtonToZone(_ textField: UITextField) {
+    private func addDoneButtonToZone(_ textField: UITextField) {
         
         let doneToolbar = UIToolbar()
         zoneTextField.inputAccessoryView = doneToolbar
@@ -84,7 +93,7 @@ class DemoTableViewCell: UITableViewCell, UITextFieldDelegate {
         zoneTextField.endEditing(true)
     }
     
-    func addDoneButtonToOutlet(_ textField: UITextField) {
+    private func addDoneButtonToOutlet(_ textField: UITextField) {
         
         let doneToolbar = UIToolbar()
         outletTextField.inputAccessoryView = doneToolbar

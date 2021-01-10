@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ZoneData: Codable {
+struct ZoneData: Codable {
     
     var newZones: [NewZones] = []
     var reuseZones: Int = 0
@@ -20,7 +20,7 @@ public struct ZoneData: Codable {
     
 }
 
-public class NewZones: Codable {
+class NewZones: Codable {
     
     var zoneNumber: Int?
     var zoneName: String?

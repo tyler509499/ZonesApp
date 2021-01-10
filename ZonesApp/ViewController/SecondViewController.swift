@@ -56,16 +56,14 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     //button save to array and send array to firsv controller
-    @IBAction func doneButtonSaveReturn(_ sender: Any) {
+    @IBAction private func doneButtonSaveReturn(_ sender: Any) {
         checkEmptyFields()
-        if checkComplete == true {
-            self.dismiss(animated: true) {
-                self.delegate?.sendDataToFirst(zoneArrayFromSecond: self.zoneArray)
-            }
+
+        if checkComplete == true || zoneArray.isEmpty{
+            delegate?.sendDataToFirst(zoneArrayFromSecond: self.zoneArray)
+            dismiss(animated: true)
         }
-        if zoneArray.isEmpty {
-            self.dismiss(animated: true)
-        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,26 +78,13 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as? DemoTableViewCell else {
             return UITableViewCell()
         }
         
         let zone = self.zoneArray[indexPath.row]
         
-        cell.addDoneButtonToZone(cell.zoneTextField)
-        cell.addDoneButtonToOutlet(cell.outletTextField)
-        
-        cell.zoneTextField.placeholder = "Enter name"
-        cell.outletTextField.placeholder = "Enter number"
-        
-        cell.zoneTextField.tag = indexPath.row
-        cell.outletTextField.tag = indexPath.row
-        
-        cell.zoneLabel.text = "Zone " + String(zone.zoneNumber!)
-        
         cell.modelToTableViewUpdate(zone)
-        
         return cell
     }
     
@@ -110,15 +95,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     //update zone Number
-    func refreshZoneOrders() {
+    private func refreshZoneOrders() {
         if !zoneArray.isEmpty {
             for i in 0..<zoneArray.count {zoneArray[i].zoneNumber = i + 1}
         }
+        
     }
     
     //check textfields for nil, if true - alert
     
-    func checkEmptyFields() {
+    private func checkEmptyFields() {
         
         for i in 0..<zoneArray.count {
             
@@ -126,19 +112,20 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let zone = self.zoneArray[indexPath.row]
             //alert for zone Name
             if zone.zoneName == nil || zone.zoneName == "" {
-                
                 checkComplete = false
                 let alert = UIAlertController(title: "Empty Zone Name", message: "Enter the name of the Zone \(zone.zoneNumber!)", preferredStyle: .alert)
-                self.present(alert, animated: true, completion: nil)
+                present(alert, animated: true, completion: nil)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
                     self.tableView.scrollToRow(at: indexPath, at: . middle, animated: true)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.25){
                         let cell : DemoTableViewCell? = self.tableView.cellForRow(at: indexPath) as! DemoTableViewCell?
                         cell?.zoneTextField.becomeFirstResponder()
+                        
                     }
                 })
                 alert.addAction(okAction)
+                
                 break
             } else {
                 checkComplete = true
@@ -149,7 +136,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 checkComplete = false
                 let alert = UIAlertController(title: "Empty No. of outlet", message: "Enter the No. of outlet of the Zone \(zone.zoneNumber!)", preferredStyle: .alert)
-                self.present(alert, animated: true, completion: nil)
+                present(alert, animated: true, completion: nil)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
                     self.tableView.scrollToRow(at: indexPath, at: . middle, animated: true)
                     
@@ -160,9 +147,11 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 })
                 alert.addAction(okAction)
                 break
+                
             } else {
                 checkComplete = true
             }
+            
         }
     }
     //       delete row by swipe
@@ -176,12 +165,13 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.tableView.reloadData()
             }
         }
+        
     }
     //      insert new row button
-    @IBAction func addButtonTapped(_ sender: UIButton) {
+    @IBAction private func addButtonTapped(_ sender: UIButton) {
         let indexPath = IndexPath(row: self.zoneArray.count, section: 0)
         zoneArray.append(NewZones(zoneNumber: indexPath.row + 1, zoneName: nil , outletNumber: nil))
-        self.tableView.insertRows(at: [indexPath], with: .automatic)
+        tableView.insertRows(at: [indexPath], with: .automatic)
     }
 }
 

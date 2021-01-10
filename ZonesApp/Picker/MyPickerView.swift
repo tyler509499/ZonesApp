@@ -22,12 +22,12 @@ class MyPickerView: UIPickerView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.commonInitToolbar()
+        commonInitToolbar()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.commonInitToolbar()
+        commonInitToolbar()
     }
 
     private func commonInitToolbar() {
@@ -60,16 +60,16 @@ class MyPickerView: UIPickerView {
         toolBar.items = [cancelButton, flexSpace, doneButton]
         toolBar.isUserInteractionEnabled = true
         
-        self.toolbar = toolBar
+        toolbar = toolBar
        
         
     }
     
-    @objc func doneTapped(_ button: UIBarButtonItem?) {
-        self.pickerDelegate?.didTapDone()
+    @objc private func doneTapped(_ button: UIBarButtonItem?) {
+        pickerDelegate?.didTapDone()
     }
 
-    @objc func cancelTapped(_ button: UIBarButtonItem?) {
-        self.pickerDelegate?.didTapCancel()
+    @objc private func cancelTapped(_ button: UIBarButtonItem?) {
+        pickerDelegate?.didTapCancel()
     }
 }

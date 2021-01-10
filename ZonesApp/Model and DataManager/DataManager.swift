@@ -28,7 +28,7 @@ public class DataManager {
         return documentsDirectory.appendingPathComponent("zone_data.json")}()
     
     
-    func loadJSON() -> ZoneData? {
+    private func loadJSON() -> ZoneData? {
         do {
             let data = try Data(contentsOf: zoneJSONURL)
             let decodedZones = try JSONDecoder().decode(ZoneData.self, from: data)
@@ -38,7 +38,7 @@ public class DataManager {
         }
     }
     
-    func saveJSON(_ zoneData: ZoneData) {
+    private func saveJSON(_ zoneData: ZoneData) {
         
         do {
             let data = try JSONEncoder().encode(zoneData)

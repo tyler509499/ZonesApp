@@ -83,7 +83,7 @@ extension FirstViewController {
 //picker buttons
 extension FirstViewController {
     
-    func hidePickerKeyboardOnTap(_ selector: Selector) {
+    private func hidePickerKeyboardOnTap(_ selector: Selector) {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: selector)
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
@@ -99,7 +99,7 @@ extension FirstViewController {
         self.reuseZonesTextField.resignFirstResponder()
     }
     
-    @objc func dismissKeyboardPicker() {
+    @objc private func dismissKeyboardPicker() {
         view.endEditing(true)
     }
 }
@@ -110,6 +110,7 @@ extension FirstViewController {
         if segue.identifier == "sendArrayToTable" {
             if let destVC = segue.destination as? UINavigationController,
                let targetController = destVC.topViewController as? SecondViewController {
+                
                 targetController.zoneArray = dataSource
                 targetController.delegate = self
             }
